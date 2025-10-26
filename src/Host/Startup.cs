@@ -13,14 +13,21 @@ namespace Host
         {
             services.AddDbContext<IdentityDbContext>(opt => opt.UseInMemoryDatabase("test"));
 
-            services.AddIdentity<IdentityUser, IdentityRole>()
+            services.AddIdentity<IdentityUser, IdentityRole>(options =>
+            {
+                options.Password.RequireDigit = false;
+                options.Password.RequireLowercase = false;
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequireUppercase = false;
+                options.Password.RequiredLength = 4;
+            })
                 .AddEntityFrameworkStores<IdentityDbContext>()
                 .AddDefaultTokenProviders();
 
             services.AddIdentityManager()
                 .AddIdentityMangerService<AspNetCoreIdentityManagerService<IdentityUser, string, IdentityRole, string>>();
         }
-        
+
         public void Configure(IApplicationBuilder app)
         {
             app.UseDeveloperExceptionPage();

@@ -420,9 +420,9 @@ namespace IdentityManager2.AspNetIdentity
                 RoleClaimType = RoleClaimType,
                 SupportsCreate = true,
                 SupportsDelete = true,
-                CreateProperties = new[] {
+                CreateProperties = [
                     PropertyMetadata.FromProperty<TRole>(x=>x.Name, name: IdentityManagerConstants.ClaimTypes.Name, required: true),
-                }
+                ]
             };
 
             var meta = new IdentityManagerMetadata
